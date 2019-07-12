@@ -12,15 +12,9 @@ namespace permutations
             Console.WriteLine(string.Join(",",p.PermsI("bing")));
         }
 
-        // Helper for swapping items
-        void Swap<T>(ref T a, ref T b) {
-            T tmp = a;
-            a = b;
-            b = tmp;
-        }
-
         ////////////////////////////////////////////////
         // A Recursive solution to permutations       //
+        // Note new tuple swap we can do now in C#!   //
         ////////////////////////////////////////////////
         void PermsHelp(char[] a,int start, int end, List<string> perms) {
             if (start == end)
@@ -29,9 +23,9 @@ namespace permutations
                 return;
             }
             for (int i=start; i<end; i++) {
-                Swap(ref a[i],ref a[start]);
+                (a[i], a[start]) = (a[start], a[i]);
                 PermsHelp(a, start + 1, end, perms);
-                Swap(ref a[i], ref a[start]);
+                (a[i], a[start]) = (a[start], a[i]);
             }
         }
 
